@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import include, path
-from django.views.generic import TemplateView
+from django.views.generic import RedirectView, TemplateView
 
 from filebrowser.sites import site as fb_site
 from rest_framework.authtoken import views as rest_token_views
@@ -14,6 +14,7 @@ admin.autodiscover()
 
 urlpatterns = [
     # admin
+    path('admin', RedirectView.as_view(url='/admin/', permanent=False)),
     path(
         'admin/',
         include([

@@ -11,7 +11,7 @@
 
 3. Для ручного выполнения команд (например, создание суперпользователя) используйте:
    ```bash
-   docker-compose run --rm web python manage.py createsuperuser
+   docker compose run --rm web python manage.py createsuperuser
    ```
 
 ## Локальная настройка без Docker
