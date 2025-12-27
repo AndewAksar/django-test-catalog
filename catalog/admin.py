@@ -14,7 +14,13 @@ class ProductParameterInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'base_price', 'sort_order')
-    search_fields = ('name', 'description')
+    list_display = ('id', 'name', 'base_price', 'sort_order')
+    search_fields = (
+        'name',
+        'description',
+        'images__caption',
+        'parameters__name',
+        'parameters__value',
+    )
     ordering = ('sort_order', 'name')
     inlines = [ProductImageInline, ProductParameterInline]
