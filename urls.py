@@ -31,6 +31,7 @@ urlpatterns = [
     path('rest/',
          include([
              path('token/', rest_token_views.obtain_auth_token),
+             path('', include('catalog.urls')),
          ])),
 ]
 
