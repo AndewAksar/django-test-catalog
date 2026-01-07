@@ -4,13 +4,16 @@ from django.db.models import Count
 
 from catalog.models import (
     Product,
-    ProductParameter
-)
+    ProductParameter,
+    ProductImage,
+    )
 from catalog.filters import ProductFilter
 from catalog.serializers import (
     ProductDetailSerializer,
     ProductListSerializer,
-    ParameterFilterSerializer
+    ParameterFilterSerializer,
+    ProductImageSerializer,
+    ProductParameterSerializer,
 )
 
 class ProductListView(generics.ListAPIView):
@@ -32,3 +35,15 @@ class ParameterFilterListView(generics.ListAPIView):
                 product_count=Count('product', distinct=True)
             ).order_by('name')
         )
+
+class ProductImageListView(generics.ListAPIView):
+    serializer_class = ProductImageSerializer
+
+    def get_queryset(self):
+        return ProductImage.objects.filter(product_id=self.kwargs['product_id'])
+
+class ProductParameterListView(generics.ListAPIView):
+    serializer_class = ProductParameterSerializer
+
+    def get_queryset(self):
+        return ProductParameter.objects.filter(product_id=self.kwargs['product_id'])
