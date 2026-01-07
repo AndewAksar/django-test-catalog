@@ -5,12 +5,14 @@ from catalog.models import Product, ProductParameter, ProductImage
 class ProductImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
-        fields = "__all__"
+        fields = ['id', 'product', 'image', 'caption', 'sort_order']
+        read_only_fields = ['id', 'product']
 
 class ProductParameterSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductParameter
-        fields = "__all__"
+        fields = ['id', 'product', 'name', 'value', 'price', 'sort_order']
+        read_only_fields = ['id', 'product']
 
 class ProductListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,3 +31,8 @@ class ProductDetailSerializer(serializers.ModelSerializer):
             'images',
             'parameters'
         ]
+
+class ParameterFilterSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    values = serializers.ListField(child=serializers.CharField())
+    product_count = serializers.IntegerField()
