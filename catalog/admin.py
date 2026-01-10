@@ -23,4 +23,4 @@ class ProductAdmin(admin.ModelAdmin):
         'parameters__value',
     )
     ordering = ('sort_order', 'name')
-    inlines = [ProductImageInline, ProductParameterInline]
+    inlines = (ProductImageInline, ProductParameterInline)

@@ -1,4 +1,4 @@
-from gjango_filters import rest_framework as filters
+from django_filters import rest_framework as filters
 
 from catalog.models import Product
 
@@ -18,4 +18,8 @@ class ProductFilter(filters.FilterSet):
             'param_name',
             'param_value',
         ]
-        distinct = True
+
+    @property
+    def qs(self):
+        queryset = super().qs
+        return queryset.distinct()
