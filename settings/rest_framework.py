@@ -26,4 +26,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': ('rest_framework.pagination'
                                  '.LimitOffsetPagination'),
     'PAGE_SIZE': 100,
+
+    # schema
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Catalog API',
+    'DESCRIPTION': 'REST API for catalog products, parameters and images.',
+    'VERSION': '1.0.0',
 }

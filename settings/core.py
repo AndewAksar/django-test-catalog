@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'grappelli',
     'rest_framework',
     'rest_framework.authtoken',
+    'drf_spectacular',
     'catalog',
 
     # should be last for overridings
