@@ -8,11 +8,8 @@ from django.urls import include, path
 from django.views.generic import RedirectView, TemplateView
 
 from filebrowser.sites import site as fb_site
-from rest_framework.authtoken import views as rest_token_views
-from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework import permissions
-from rest_framework.permissions import AllowAny
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.authtoken import views as rest_token_views
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 admin.autodiscover()
@@ -20,8 +17,7 @@ admin.autodiscover()
 urlpatterns = [
     # admin
     path('admin', RedirectView.as_view(url='/admin/', permanent=False)),
-    path(
-        'admin/',
+    path('admin/',
         include([
             # third-party
             path('django-rq/', include('django_rq.urls')),
@@ -31,18 +27,24 @@ urlpatterns = [
             # django
             path('', admin.site.urls),
         ])),
-
+    # schema
+    path('schema/',
+         SpectacularAPIView.as_view(
+            permission_classes=[permissions.AllowAny]),
+            name='schema'
+         ),
+    # docs
+    path('docs/',
+         SpectacularSwaggerView.as_view(
+            url_name='schema',
+            permission_classes=[permissions.AllowAny]),
+            name='swagger-ui'
+         ),
     # rest
     path('rest/',
          include([
-             path('token/', ObtainAuthToken.as_view(permission_classes=[AllowAny]), name='token'),
-             path('schema/', SpectacularAPIView.as_view(
-                 permission_classes=[permissions.AllowAny]), name='schema'),
-             path('docs/', SpectacularSwaggerView.as_view(
-                 url_name='schema',
-                 permission_classes=[permissions.AllowAny]),
-                 name='swagger-ui'),
-             path('', include('catalog.urls')),
+            path("token/", rest_token_views.obtain_auth_token, name="token"),
+            path('', include('catalog.urls')),
          ])),
 ]
 

@@ -1,4 +1,4 @@
-# Django Test Catalog
+**# Django Test Catalog
 
 ## Запуск через Docker
 1. Соберите и поднимите сервисы (PostgreSQL 13, Redis 5 и Django) командой:
@@ -16,6 +16,27 @@
 
 ## Локальная настройка без Docker
 Если вы запускаете проект без контейнеров, создайте файл `settings/local.py` (шаблон уже включён и использует переменные среды) и укажите параметры подключения к PostgreSQL/Redis, `DEBUG`, `ALLOWED_HOSTS` и т.п. Пример переменных приведён в `docker-compose.yml`.
+
+## Запуск тестов
+### В запущенном контейнере
+Если контейнеры уже подняты командой `docker compose up`, выполните:
+```bash
+  docker compose exec web python manage.py test
+```
+
+### Одноразовый запуск тестов в контейнере
+Если нужно запустить тесты в отдельном контейнере:
+```bash
+  docker compose run --rm web python manage.py test
+```
+
+## Получение токена авторизации (для Swagger/ручной проверки API)
+Для обращения к защищённым REST-эндпоинтам нужен токен. Команда для получения:
+```bash
+  curl -X POST http://127.0.0.1:8001/rest/token/ \
+  -d "username=admin" -d "password=ТВОЙ_ПАРОЛЬ"
+```
+
 
 ## Разбор работы приложения
 
@@ -81,4 +102,4 @@ DRF использует `SessionAuthentication` и `TokenAuthentication`. Дл�
 ### Очереди и кэш
 Redis используется как backend для:
 * кэша приложения и хранения сессий (настройки в `settings/cache.py`);
-* очередей задач через Django RQ (настройка `settings/rq.py`, UI доступен в админке `/admin/django-rq/`).
+* очередей задач через Django RQ (настройка `settings/rq.py`, UI доступен в админке `/admin/django-rq/`).**
