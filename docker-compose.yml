@@ -10,23 +10,22 @@ services:
         echo 'Файл settings/local.py.example(.py) не найден. Создайте его из шаблона и повторите запуск.' >&2;
         exit 1;
       fi
-      && python manage.py makemigrations catalog
       && python manage.py migrate
       && python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8001:8000"
     volumes:
       - .:/app
+    env_file:
+      - .env
     environment:
       DJANGO_SETTINGS_MODULE: settings
-      DEBUG: "True"
-      ALLOWED_HOSTS: "*"
       INTERNAL_IPS: "127.0.0.1,localhost"
       POSTGRES_HOST: db
       POSTGRES_PORT: 5432
       POSTGRES_DB: itcase_django_test_task
       POSTGRES_USER: itcase_django_test_task
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       REDIS_HOST: redis
       REDIS_PORT: 6379
     depends_on:
@@ -35,6 +34,8 @@ services:
 
   db:
     image: postgres:13
+    env_file:
+      - .env
     environment:
       POSTGRES_DB: itcase_django_test_task
       POSTGRES_USER: itcase_django_test_task

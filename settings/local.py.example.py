@@ -10,10 +10,14 @@ import os
 from .cache import CACHES
 from .core import DATABASES, TEMPLATES
 
-DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
-TEMPLATES[0]['OPTIONS'].update({'debug': DEBUG})
+DEBUG = os.getenv("DEBUG", "0").strip().lower() in ("1", "true", "yes", "on")
+TEMPLATES[0]["OPTIONS"].update({"debug": DEBUG})
 
-ALLOWED_HOSTS = [host.strip() for host in os.getenv('ALLOWED_HOSTS', '*').split(',') if host.strip()]
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+    if host.strip()
+]
 INTERNAL_IPS = tuple(ip.strip() for ip in os.getenv('INTERNAL_IPS', '127.0.0.1,localhost').split(',') if ip.strip())
 
 DATABASES['default']['HOST'] = os.getenv('POSTGRES_HOST', DATABASES['default']['HOST'])
