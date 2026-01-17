@@ -1,0 +1,54 @@
+services:
+  web:
+    build: .
+    command: >-
+      sh -c "if [ -f settings/local.py.example.py ]; then
+        cp -n settings/local.py.example.py settings/local.py;
+      elif [ -f settings/local.py.example ]; then
+        cp -n settings/local.py.example settings/local.py;
+      else
+        echo 'Файл settings/local.py.example(.py) не найден. Создайте его из шаблона и повторите запуск.' >&2;
+        exit 1;
+      fi
+      && python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8001:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      DJANGO_SETTINGS_MODULE: settings
+      INTERNAL_IPS: "127.0.0.1,localhost"
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: itcase_django_test_task
+      POSTGRES_USER: itcase_django_test_task
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:13
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: itcase_django_test_task
+      POSTGRES_USER: itcase_django_test_task
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:5
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:

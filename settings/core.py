@@ -1,6 +1,8 @@
 # Copyright 2022 ITCase (info@itcase.pro)
 
 # Main settings for project
+import os
+from django.core.exceptions import ImproperlyConfigured
 
 from . import BASE_DIR
 from .project import PROJECT_NAME
@@ -13,7 +15,9 @@ MANAGERS = ADMINS
 
 # This is used to provide cryptographic signing, and should be set to a unique,
 # unpredictable value.
-SECRET_KEY = 'django-insecure-fxxkmli&wu&sajpl6&q^l1fd5ne1q-vb*w54(a68(_i6npya$3'
+SECRET_KEY = os.getenv("SECRET_KEY")
+if not SECRET_KEY:
+    raise ImproperlyConfigured("SECRET_KEY is not set in environment")
 
 # A list of strings designating all applications that are enabled.
 INSTALLED_APPS = [
@@ -32,6 +36,8 @@ INSTALLED_APPS = [
     'grappelli',
     'rest_framework',
     'rest_framework.authtoken',
+    'drf_spectacular',
+    'catalog',
 
     # should be last for overridings
     'django.contrib.admin',

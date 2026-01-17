@@ -1,0 +1,191 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Classic Chair",
+      "description": "A solid wood chair with a matte finish.",
+      "base_price": "120.00",
+      "sort_order": 10
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Modern Table",
+      "description": "Minimalist dining table for four.",
+      "base_price": "350.00",
+      "sort_order": 20
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Soft Sofa",
+      "description": "Two-seat sofa with removable covers.",
+      "base_price": "780.00",
+      "sort_order": 30
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "image": "products/classic-chair-front.jpg",
+      "caption": "Front view",
+      "sort_order": 10
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "image": "products/classic-chair-detail.jpg",
+      "caption": "Detail view",
+      "sort_order": 20
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "image": "products/modern-table-top.jpg",
+      "caption": "Table top",
+      "sort_order": 10
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "image": "products/modern-table-room.jpg",
+      "caption": "In room",
+      "sort_order": 20
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 5,
+    "fields": {
+      "product": 3,
+      "image": "products/soft-sofa-front.jpg",
+      "caption": "Front view",
+      "sort_order": 10
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 6,
+    "fields": {
+      "product": 3,
+      "image": "products/soft-sofa-side.jpg",
+      "caption": "Side profile",
+      "sort_order": 20
+    }
+  },
+  {
+    "model": "catalog.productparameter",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "name": "Material",
+      "value": "Oak",
+      "price": "0.00",
+      "sort_order": 10
+    }
+  },
+  {
+    "model": "catalog.productparameter",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "name": "Color",
+      "value": "Natural",
+      "price": "0.00",
+      "sort_order": 20
+    }
+  },
+  {
+    "model": "catalog.productparameter",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "name": "Finish",
+      "value": "Matte",
+      "price": "15.00",
+      "sort_order": 30
+    }
+  },
+  {
+    "model": "catalog.productparameter",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "name": "Material",
+      "value": "Walnut",
+      "price": "0.00",
+      "sort_order": 10
+    }
+  },
+  {
+    "model": "catalog.productparameter",
+    "pk": 5,
+    "fields": {
+      "product": 2,
+      "name": "Length",
+      "value": "180 cm",
+      "price": "0.00",
+      "sort_order": 20
+    }
+  },
+  {
+    "model": "catalog.productparameter",
+    "pk": 6,
+    "fields": {
+      "product": 2,
+      "name": "Shape",
+      "value": "Rectangular",
+      "price": "0.00",
+      "sort_order": 30
+    }
+  },
+  {
+    "model": "catalog.productparameter",
+    "pk": 7,
+    "fields": {
+      "product": 3,
+      "name": "Fabric",
+      "value": "Linen",
+      "price": "0.00",
+      "sort_order": 10
+    }
+  },
+  {
+    "model": "catalog.productparameter",
+    "pk": 8,
+    "fields": {
+      "product": 3,
+      "name": "Color",
+      "value": "Sand",
+      "price": "0.00",
+      "sort_order": 20
+    }
+  },
+  {
+    "model": "catalog.productparameter",
+    "pk": 9,
+    "fields": {
+      "product": 3,
+      "name": "Cushions",
+      "value": "2 included",
+      "price": "0.00",
+      "sort_order": 30
+    }
+  }
+]
